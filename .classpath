@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="/Users/JunqiWang/CMU/Development Kit/mysql-connector-java-5.1.26/mysql-connector-java-5.1.26-bin.jar"/>
+	<classpathentry kind="lib" path="/Users/JunqiWang/CMU/Development Kit/json-lib-2.4-jdk15.jar"/>
+	<classpathentry kind="lib" path="/Users/JunqiWang/CMU/apache-tomcat-7.0.42/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="/Users/JunqiWang/CMU/Development Kit/tomcat-catalina-7.0.27.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
