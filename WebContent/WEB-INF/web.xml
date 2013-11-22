@@ -19,12 +19,12 @@
     <async-supported>true</async-supported>
   </servlet>
   <servlet>
-  	<servlet-name>Signup</servlet-name>
-  	<servlet-class>com.wilddynamos.bookappserver.servlet.SignupServlet</servlet-class>
+    <servlet-name>Signup</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.SignupServlet</servlet-class>
   </servlet>
   <servlet>
-  	<servlet-name>Logout</servlet-name>
-  	<servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>PostList</servlet-name>
@@ -55,16 +55,16 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>LongConn</servlet-name>
-  	<url-pattern>/LongConn</url-pattern>
+    <servlet-name>LongConn</servlet-name>
+    <url-pattern>/LongConn</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>Signup</servlet-name>
-  	<url-pattern>/Signup</url-pattern>
+    <servlet-name>Signup</servlet-name>
+    <url-pattern>/Signup</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>Logout</servlet-name>
-  	<url-pattern>/Logout</url-pattern>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>PostList</servlet-name>
@@ -79,8 +79,8 @@
     <url-pattern>/Like</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-  	<servlet-name>RequestBook</servlet-name>
-  	<url-pattern>/RequestBook</url-pattern>
+    <servlet-name>RequestBook</servlet-name>
+    <url-pattern>/RequestBook</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Test</servlet-name>
