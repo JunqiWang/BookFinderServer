@@ -1,51 +1,29 @@
 package com.wilddynamos.bookappserver.servlet;
 
 import java.io.*;
-import java.util.Enumeration;
-import java.util.Iterator;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.wilddynamos.bookappserver.ActiveUserPool;
-
+@WebServlet(asyncSupported = true)
 public class LongConnRegServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 
-		response.setCharacterEncoding("UTF-8");
+		//this line is important
+		response.setContentType("text/html; charset=UTF-8");
 		
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		
-//		UserManager um = new UserManager();
-//		List<User> users = um.findByProp("id", id, null, null, 1, 1);
-//		um.close();
-		for(Enumeration<String> e = request.getHeaderNames(); e.hasMoreElements();) {
-			String name = e.nextElement();
-			System.out.println(name+"="+request.getHeader(name));
-			
-		}
-		for(Iterator<String> e = response.getHeaderNames().iterator(); e.hasNext();)
-		System.err.println(e.next());
-		ActiveUserPool.userId2response.put(id, response);
-		System.out.println(ActiveUserPool.userId2response.get(1));
-		
-		
-			synchronized(ActiveUserPool.sb) {
-//				if(ActiveUserPool.running)
-//					break;
-				
-				try {
-					while("1".equals(ActiveUserPool.sb.toString()))
-						ActiveUserPool.sb.wait();
-					
-				} catch(Exception e) {
-					
-				}
-			}
+		PrintWriter out = response.getWriter();
+		out.println("New");
+		//this line is important
+		out.flush();System.out.println("here"+request.getParameter("id"));
 
-		response.getWriter().println("hi");
+		request.startAsync(request, response);
+		new MessageSender(request.getAsyncContext()).start();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
@@ -54,5 +32,34 @@ public class LongConnRegServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
+	private static class MessageSender extends Thread {
+		
+		AsyncContext actx;
+		
+		public MessageSender(AsyncContext actx) {
+			this.actx = actx;
+			actx.setTimeout(1000 * 60 * 30);
+			this.setPriority(MAX_PRIORITY);
+		}
+		
+		@Override
+		public void run() {
+			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
+			
+			synchronized(ActiveUserPool.userIds) {
+				try {
+					while(!ActiveUserPool.userIds.contains(id))
+						ActiveUserPool.userIds.wait();
+					System.out.println(id);
+					ActiveUserPool.userIds.remove(id);System.out.println("get it");
+				} catch(Exception e) {
+				}
+			}
+//			try {
+//				sleep(1000);
+//			} catch (InterruptedException e) {
+//			}
+			actx.dispatch();
+		}
+	}
 }
-

@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wilddynamos.bookappserver.ActiveUserPool;
 import com.wilddynamos.bookappserver.model.Book;
 import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.service.BookManager;
 import com.wilddynamos.bookappserver.service.RequestManager;
+import com.wilddynamos.bookappserver.servlet.ActiveUserPool;
 
 public class PostDetailServlet extends HttpServlet {
 	
@@ -54,19 +54,24 @@ public class PostDetailServlet extends HttpServlet {
 				hasRequested = true;
 		}
 		
+		String image = null;
+		
 		String path = this.getServletContext().getRealPath("/book_cover");
 		File file = new File(path + "/" + books.get(0).getCoverPath());
-		FileInputStream fis = new FileInputStream(file);
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		byte[] buf = new byte[1024 * 1024];
-		try {
-			for(int readNum; (readNum = fis.read(buf)) != -1;)
-				bos.write(buf, 0, readNum);
-		} catch(Exception e) {
-			e.printStackTrace();
+		if(file.exists() && file.isFile()) {
+			FileInputStream fis = new FileInputStream(file);
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			byte[] buf = new byte[1024 * 1024];
+		
+			try {
+				for(int readNum; (readNum = fis.read(buf)) != -1;)
+					bos.write(buf, 0, readNum);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			byte[] bytes = bos.toByteArray();
+			image = new String(bytes, Charset.forName("ISO-8859-1"));
 		}
-		byte[] bytes = bos.toByteArray();
-		String s = new String(bytes, Charset.forName("ISO-8859-1"));
 		
 		JSONArray json = new JSONArray();
 		JSONObject jo = new JSONObject();
@@ -74,7 +79,7 @@ public class PostDetailServlet extends HttpServlet {
 		jo.put("id", books.get(0).getId());
 		jo.put("name", books.get(0).getName());
 		jo.put("price", books.get(0).getPrice());
-		jo.put("cover", s);
+		jo.put("cover", image);
 		
 		if(!books.get(0).getsOrR()) {
 			jo.put("per", books.get(0).getPer());

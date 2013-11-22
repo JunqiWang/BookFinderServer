@@ -6,7 +6,7 @@ import java.util.*;
 import com.wilddynamos.bookappserver.model.Book;
 
 public class BookDao {
-	private static final Integer DEFAULT_BOOK_PAGESIZE = 10;
+	private static final Integer DEFAULT_BOOK_PAGESIZE = 20;
 	private Connection conn;
 	private Statement stmt;
 	
@@ -142,6 +142,7 @@ public class BookDao {
 				case 5: sql += " <= '" + value + "'"; break;
 				case 6: sql += " > '" + value + "'"; break;
 				case 7: sql += " >= '" + value + "'"; break;
+				case 8: sql += " <> '" + value + "'"; break;
 				default: sql += " = '" + value + "'";
 			}
 			pageSize = (pageSize == null ? DEFAULT_BOOK_PAGESIZE : pageSize);
@@ -173,20 +174,20 @@ public class BookDao {
 	}
 	
 	public List<Book> findAllAvailableBooks(Integer currentPage, 
-			Integer pageSize, Boolean sOrR, String search) {
+			Integer pageSize, Boolean sOrR, String search, Integer userId) {
 		List<Book> books = new ArrayList<Book>();
 		try {
-			String sql = "SELECT * FROM book WHERE status = 0 ";
+			String sql = "SELECT * FROM book WHERE status = 0 AND owner_id <> '" + userId + "'";
 			if(sOrR != null)
-				sql += "AND s_or_r = " + sOrR + " ";
+				sql += " AND s_or_r = " + sOrR;
 			if(search != null && !"".equals(search))
-				sql += "AND name LIKE '%" + search + "%' ";
-			sql += "ORDER BY post_time desc";
+				sql += " AND name LIKE '%" + search + "%'";
+			sql += " ORDER BY post_time desc";
 			
 			pageSize = pageSize == null ? DEFAULT_BOOK_PAGESIZE : pageSize;
 			sql += " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
-			
+			System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next())
@@ -205,7 +206,7 @@ public class BookDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println("books = " + books.size());
 		return books;
 	}
 }

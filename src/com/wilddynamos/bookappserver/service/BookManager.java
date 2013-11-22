@@ -61,8 +61,9 @@ public class BookManager {
 	}
 	
 	public List<Book> findAllAvailableBooks(Integer currentPage, 
-			Integer pageSize, Boolean sOrR, String search) {
-		List<Book> books =  bookDao.findAllAvailableBooks(currentPage, pageSize, sOrR, search);
+			Integer pageSize, Boolean sOrR, String search, Integer userId) {
+		
+		List<Book> books =  bookDao.findAllAvailableBooks(currentPage, pageSize, sOrR, search, userId);
 		
 		UserManager um = new UserManager();
 		for(Book book: books)

@@ -11,9 +11,12 @@ import net.sf.json.JSONObject;
 
 import com.wilddynamos.bookappserver.model.Book;
 import com.wilddynamos.bookappserver.service.BookManager;
+import com.wilddynamos.bookappserver.servlet.ActiveUserPool;
 
 public class PostListServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 4953808045786008751L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		
@@ -33,7 +36,8 @@ public class PostListServlet extends HttpServlet {
 		String search = request.getParameter("search");
 
 		BookManager bm = new BookManager();
-		List<Book> books = bm.findAllAvailableBooks(currentPage, null, sOrR, search);
+		List<Book> books = bm.findAllAvailableBooks(currentPage, null, sOrR, search, 
+				ActiveUserPool.session2user.get(request.getSession(true).getId()).getId());
 		bm.close();
 		
 		JSONArray json = new JSONArray();
@@ -51,7 +55,7 @@ public class PostListServlet extends HttpServlet {
 			jo.put("sOrR", b.getsOrR());
 			json.add(jo);
 		}
-		
+		System.out.println(json.size());
 		response.getWriter().print(json.toString());
 	}
 

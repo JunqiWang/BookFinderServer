@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
+    id="WebApp_ID" version="3.0">
   <description>rent sell</description>
   <display-name>Book</display-name>
   <servlet>
@@ -13,6 +16,7 @@
   <servlet>
     <servlet-name>LongConn</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.LongConnRegServlet</servlet-class>
+    <async-supported>true</async-supported>
   </servlet>
   <servlet>
     <servlet-name>Signup</servlet-name>
@@ -83,6 +87,6 @@
     <url-pattern>/Test</url-pattern>
   </servlet-mapping>
   <session-config>
-    <session-timeout>-1</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
 </web-app>

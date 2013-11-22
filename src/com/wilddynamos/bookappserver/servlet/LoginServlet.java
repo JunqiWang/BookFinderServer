@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-import com.wilddynamos.bookappserver.ActiveUserPool;
 import com.wilddynamos.bookappserver.model.User;
 import com.wilddynamos.bookappserver.service.UserManager;
 
