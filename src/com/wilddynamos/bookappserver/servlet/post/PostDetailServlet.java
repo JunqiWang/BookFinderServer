@@ -1,14 +1,19 @@
 package com.wilddynamos.bookappserver.servlet.post;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.wilddynamos.bookappserver.ActiveUserPool;
 import com.wilddynamos.bookappserver.model.Book;
