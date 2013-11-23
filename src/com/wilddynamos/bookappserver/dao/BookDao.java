@@ -13,7 +13,7 @@ public class BookDao {
 	public BookDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "root", null);
+			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
