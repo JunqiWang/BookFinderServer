@@ -6,7 +6,7 @@ import java.util.*;
 import com.wilddynamos.bookappserver.model.User;
 
 public class UserDao {
-	public static final String address = "jdbc:mysql://10.0.23.238:3306/book_app";
+	public static final String address = "jdbc:mysql://192.168.1.7:3306/book_app";
 	
 	private static final Integer DEFAULT_USER_PAGESIZE = 10;
 	private Connection conn;
