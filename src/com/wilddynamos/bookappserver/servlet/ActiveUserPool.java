@@ -12,6 +12,6 @@ public abstract class ActiveUserPool {
 	public static Map<String, User> session2user
 		= new ConcurrentHashMap<String, User>();
 	
-	public static Set<Integer> userIds = new HashSet<Integer>();
+	public static Set<Integer> ownerIds = new HashSet<Integer>();
 	
 }

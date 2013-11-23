@@ -46,9 +46,9 @@ public class RequestBookServlet extends HttpServlet {
 		bm.close();
 		int ownerId = books.get(0).getOwnerId();
 		
-		synchronized(ActiveUserPool.userIds) {
-			ActiveUserPool.userIds.add(ownerId);
-			ActiveUserPool.userIds.notifyAll();System.out.println("req" + ownerId);
+		synchronized(ActiveUserPool.ownerIds) {
+			ActiveUserPool.ownerIds.add(ownerId);
+			ActiveUserPool.ownerIds.notifyAll();System.out.println("req" + ownerId);
 		}
 		
 		if(row < 0)

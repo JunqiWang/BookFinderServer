@@ -46,19 +46,15 @@ public class LongConnRegServlet extends HttpServlet {
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
 			
-			synchronized(ActiveUserPool.userIds) {
+			synchronized(ActiveUserPool.ownerIds) {
 				try {
-					while(!ActiveUserPool.userIds.contains(id))
-						ActiveUserPool.userIds.wait();
+					while(!ActiveUserPool.ownerIds.contains(id))
+						ActiveUserPool.ownerIds.wait();
 					System.out.println(id);
-					ActiveUserPool.userIds.remove(id);System.out.println("get it");
+					ActiveUserPool.ownerIds.remove(id);System.out.println("get it");
 				} catch(Exception e) {
 				}
 			}
-//			try {
-//				sleep(1000);
-//			} catch (InterruptedException e) {
-//			}
 			actx.dispatch();
 		}
 	}
