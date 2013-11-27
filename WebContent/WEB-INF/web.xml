@@ -36,6 +36,10 @@
     <servlet-class>com.wilddynamos.bookappserver.servlet.profile.AcceptRequestServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>GetRequestDetail</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.RequestDetailServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
   </servlet>
@@ -90,6 +94,10 @@
   <servlet-mapping>
     <servlet-name>AcceptRequest</servlet-name>
     <url-pattern>/AcceptRequest</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetRequestDetail</servlet-name>
+    <url-pattern>/GetRequestDetail</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>

@@ -48,7 +48,7 @@ public class RequestListServlet extends HttpServlet {
 			jo.put("id", r.getId());
 			jo.put("name", r.getRequester().getName());
 
-			File file = new File(path + "/" + String.valueOf(r.getId()) + ".jpg");
+			File file = new File(path + "/" + String.valueOf(r.getRequesterId()) + ".jpg");
 			String photo = null;
 			if(file.exists() && file.isFile()) {
 				FileInputStream fis = new FileInputStream(file);

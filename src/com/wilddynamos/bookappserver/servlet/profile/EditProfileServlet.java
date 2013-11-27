@@ -53,14 +53,14 @@ public class EditProfileServlet extends HttpServlet {
 		List<User> users = um.findByProp("id", idString, null, null, 1, 1);
 		User user = users.get(0);
 		user.setName(name);
-		user.setGender(gender.equals("M"));
+		user.setGender(gender.equals("Male"));
 		user.setCampus(campus);
 		user.setContact(contact);
 		user.setAddress(address);
 		user.setPhotoPath(path);
 		
 		int result = um.update(user);
-		System.out.println(result);
+		//System.out.println(result);
 		if (result > 0)
 			response.getWriter().println("1");
 		else if (result == 0)
