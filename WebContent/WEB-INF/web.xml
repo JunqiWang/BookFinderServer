@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
     xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
-    id="WebApp_ID" version="3.0">
+    id="BookFinder" version="3.0">
   <description>rent sell</description>
   <display-name>Book</display-name>
   <servlet>
@@ -27,12 +27,16 @@
     <servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>ForgotPwd</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.ForgotPwdServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>PostList</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.post.PostListServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>PostDetail</servlet-name>
-    <servlet-class>com.wilddynamos.bookappserver.servlet.post.PostDetailServlet</servlet-class>
+    <servlet-name>BookDetail</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.BookDetailServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LikeAPost</servlet-name>
@@ -41,6 +45,10 @@
   <servlet>
     <servlet-name>RequestBook</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.post.RequestBookServlet</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>PostOrEditBook</servlet-name>
+  	<servlet-class>com.wilddynamos.bookappserver.servlet.mybooks.PostEditBookServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Test</servlet-name>
@@ -67,12 +75,16 @@
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+  	<servlet-name>ForgotPwd</servlet-name>
+  	<url-pattern>/ForgotPwd</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>PostList</servlet-name>
     <url-pattern>/GetPosts</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>PostDetail</servlet-name>
-    <url-pattern>/GetPostDetail</url-pattern>
+    <servlet-name>BookDetail</servlet-name>
+    <url-pattern>/GetBookDetail</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>LikeAPost</servlet-name>
@@ -81,6 +93,10 @@
   <servlet-mapping>
     <servlet-name>RequestBook</servlet-name>
     <url-pattern>/RequestBook</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>PostOrEditBook</servlet-name>
+  	<url-pattern>/PostEditBook</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Test</servlet-name>

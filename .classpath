@@ -12,5 +12,8 @@
 	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.26-bin.jar"/>
 	<classpathentry kind="lib" path="libs/servlet-api.jar"/>
 	<classpathentry kind="lib" path="libs/tomcat-catalina-7.0.27.jar"/>
+	<classpathentry kind="lib" path="libs/activation.jar"/>
+	<classpathentry kind="lib" path="libs/additionnal-2.jar"/>
+	<classpathentry kind="lib" path="libs/mail.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

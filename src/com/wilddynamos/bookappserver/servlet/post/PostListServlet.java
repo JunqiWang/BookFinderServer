@@ -11,7 +11,6 @@ import net.sf.json.JSONObject;
 
 import com.wilddynamos.bookappserver.model.Book;
 import com.wilddynamos.bookappserver.service.BookManager;
-import com.wilddynamos.bookappserver.servlet.ActiveUserPool;
 
 public class PostListServlet extends HttpServlet {
 	
@@ -37,7 +36,7 @@ public class PostListServlet extends HttpServlet {
 
 		BookManager bm = new BookManager();
 		List<Book> books = bm.findAllAvailableBooks(currentPage, null, sOrR, search, 
-				ActiveUserPool.session2user.get(request.getSession(true).getId()).getId());
+				Integer.parseInt(request.getParameter("id")));
 		bm.close();
 		
 		JSONArray json = new JSONArray();
@@ -55,7 +54,7 @@ public class PostListServlet extends HttpServlet {
 			jo.put("sOrR", b.getsOrR());
 			json.add(jo);
 		}
-		System.out.println(json.size());
+
 		response.getWriter().print(json.toString());
 	}
 
