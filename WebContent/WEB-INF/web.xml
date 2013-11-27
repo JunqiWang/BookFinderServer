@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-    xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"  
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"  
-    id="WebApp_ID" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <description>rent sell</description>
   <display-name>Book</display-name>
   <servlet>
@@ -25,6 +22,18 @@
   <servlet>
     <servlet-name>EditProfile</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.profile.EditProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetRequests</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.RequestListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeclineAll</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.DeclineAllServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AcceptRequest</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.AcceptRequestServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>Logout</servlet-name>
@@ -69,6 +78,18 @@
   <servlet-mapping>
     <servlet-name>EditProfile</servlet-name>
     <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetRequests</servlet-name>
+    <url-pattern>/GetRequests</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeclineAll</servlet-name>
+    <url-pattern>/DeclineAll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AcceptRequest</servlet-name>
+    <url-pattern>/AcceptRequest</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
