@@ -48,7 +48,7 @@ public class RequestBookServlet extends HttpServlet {
 		
 		synchronized(ActiveUserPool.ownerIds) {
 			ActiveUserPool.ownerIds.add(ownerId);
-			ActiveUserPool.ownerIds.notifyAll();System.out.println("req" + ownerId);
+			ActiveUserPool.ownerIds.notifyAll();
 		}
 		
 		if(row < 0)

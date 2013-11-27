@@ -19,7 +19,6 @@ public class UserDao {
 			conn = DriverManager.getConnection(address, "zhe", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
-			//TODO
 			e.printStackTrace();
 		}
 	}
@@ -43,11 +42,12 @@ public class UserDao {
 					+ user.getEmail() + "', '"
 					+ user.getPassword() + "', '"
 					+ user.getName() + "', "
-					+ user.getGender() + ", '"
-					+ user.getCampus() + "', '"
-					+ user.getContact() + "', '"
-					+ user.getAddress() + "', '"
-					+ user.getPhotoPath() + "');");
+					+ user.getGender() + ", "
+					+ (user.getCampus() == null ? null : "'" + user.getCampus() + "'") + ", "
+					+ (user.getContact() == null ? null : "'" + user.getCampus() + "'") + ", "
+					+ (user.getAddress() == null ? null : "'" + user.getCampus() + "'") + ", "
+					+ (user.getAddress() == null ? null : "'" + user.getCampus() + "'") + ");");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -56,7 +56,7 @@ public class UserDao {
 	
 	public int removeById(Integer id) {
 		try {
-			return stmt.executeUpdate("DELETE FROM user WHERE id='" + id + "';");
+			return stmt.executeUpdate("DELETE FROM user WHERE id = " + id + ";");
 		} catch(Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -75,16 +75,18 @@ public class UserDao {
 	
 	public int update(User user) {
 		try {
-			return stmt.executeUpdate("UPDATE user SET "
-									   + "email = '" + user.getEmail() + "', "
-									   + "password = '" + user.getPassword() + "', "
-									   + "name = '" + user.getName() + "', "
-									   + "gender = " + user.getGender() + ", "
-									   + "campus = '" + user.getCampus() + "', "
-									   + "contact = '" + user.getContact() + "', "
-									   + "address = '" + user.getAddress() + "', "
-									   + "photo_path = '" + user.getPhotoPath() + "' "
-									   + "WHERE id = '" + user.getId() + "';");
+			return stmt.executeUpdate(
+					"UPDATE user SET "
+					+ "email = '" + user.getEmail() + "', "
+					+ "password = '" + user.getPassword() + "', "
+					+ "name = '" + user.getName() + "', "
+					+ "gender = " + user.getGender() + ", "
+					+ "campus = " + (user.getCampus() == null ? null : "'" + user.getCampus() + "'") + ", "
+					+ "contact = " + (user.getContact() == null ? null : "'" + user.getContact() + "'") + ", "
+					+ "address = " + (user.getAddress() == null ? null : "'" + user.getAddress() + "'") + ", "
+					+ "photo_path = " + (user.getPhotoPath() == null ? null : "'" + user.getPhotoPath() + "'") + " "
+					+ "WHERE id = " + user.getId() + ";");
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 			return -1;

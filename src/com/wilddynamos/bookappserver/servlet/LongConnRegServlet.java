@@ -20,7 +20,7 @@ public class LongConnRegServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("New");
 		//this line is important
-		out.flush();System.out.println("here"+request.getParameter("id"));
+		out.flush();
 
 		request.startAsync(request, response);
 		new MessageSender(request.getAsyncContext()).start();

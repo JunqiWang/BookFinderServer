@@ -1,19 +1,20 @@
 package com.wilddynamos.bookappserver.dao;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.wilddynamos.bookappserver.model.Book;
 
 public class BookDao {
-	private static final Integer DEFAULT_BOOK_PAGESIZE = 20;
+	private static final Integer DEFAULT_BOOK_PAGESIZE = 15;
 	private Connection conn;
 	private Statement stmt;
 	
 	public BookDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
+			conn = DriverManager.getConnection(UserDao.address, "root", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -32,18 +33,18 @@ public class BookDao {
 	public int add(Book book) {
 		try {
 			return stmt.executeUpdate(
-					"INSERT INTO book(id, name, price, per, available_time, likes"
+					"INSERT INTO book(id, name, price, per, available_time, likes,"
 					+ "s_or_r, status, description, post_time, cover_path, owner_id)"
 					+ " VALUES(null, '"
-					+ book.getName() + "', '"
-					+ book.getPrice() + "', "
-					+ book.getPer() + ", '"
-					+ book.getAvailableTime() + "', '"
-					+ book.getLikes() + "', "
+					+ book.getName() + "', "
+					+ book.getPrice() + ", "
+					+ book.getPer() + ", "
+					+ book.getAvailableTime() + ", "
+					+ 0 + ", "
 					+ book.getsOrR() + ", "
 					+ book.getStatus() + ", '"
 					+ book.getDescription() + "', '"
-					+ book.getPostTime() + "', '"
+					+ new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(book.getPostTime()) + "', '"
 					+ book.getCoverPath() + "', '"
 					+ book.getOwnerId() + "');");
 			
@@ -175,6 +176,7 @@ public class BookDao {
 	
 	public List<Book> findAllAvailableBooks(Integer currentPage, 
 			Integer pageSize, Boolean sOrR, String search, Integer userId) {
+		
 		List<Book> books = new ArrayList<Book>();
 		try {
 			String sql = "SELECT * FROM book WHERE status = 0 AND owner_id <> '" + userId + "'";
@@ -187,7 +189,7 @@ public class BookDao {
 			pageSize = pageSize == null ? DEFAULT_BOOK_PAGESIZE : pageSize;
 			sql += " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
-			System.out.println(sql);
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next())
@@ -206,7 +208,6 @@ public class BookDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("books = " + books.size());
 		return books;
 	}
 }

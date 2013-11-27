@@ -70,7 +70,7 @@ public class RequestDao {
 	
 	public int update(Request request) {
 		try {
-			return stmt.executeUpdate("UPDATE user SET"
+			return stmt.executeUpdate("UPDATE user SET "
 									   + "message = '" + request.getMessage() + "', "
 									   + "status = " + request.getStatus() + ", "
 									   + "request_time = '" + request.getRequestTime() + "', "
@@ -141,7 +141,7 @@ public class RequestDao {
 			while(rs.next())
 				requests.add(new Request(rs.getInt(1), 
 									     rs.getString(2), 
-									     rs.getBoolean(3),
+									     rs.getObject(3) == null ? null : rs.getBoolean(3),
 									     rs.getDate(4), 
 									     rs.getInt(5), 
 									     rs.getInt(6)));
