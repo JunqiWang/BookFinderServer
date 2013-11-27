@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -27,31 +28,39 @@ public class EditProfileServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		UserManager um = new UserManager();
-		int id = Integer.parseInt(request.getParameter("id"));
+		String idString = request.getParameter("id");
+		int id = Integer.parseInt(idString);
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
 		String campus = request.getParameter("campus");
 		String contact = request.getParameter("contact");
 		String address = request.getParameter("address");
 		String imageString = request.getParameter("image");
+		System.out.println(imageString.length());
 		
 		String path = this.getServletContext().getRealPath("/profile_photo");
+		System.out.println(path);
 		byte[] profileImage = imageString.getBytes(Charset.forName("ISO-8859-1"));
+		System.out.println(profileImage.length);
 		InputStream in = new ByteArrayInputStream(profileImage);
-        BufferedImage bufferedImage = ImageIO.read(in);
+		BufferedImage bufferedImage = ImageIO.read(in);
 
-        //Getting exception at this line
-        ImageIO.write(bufferedImage, "png", new File(path+"/user"+String.valueOf(id)+".png"));
+		//Getting exception at this line
+		File file = new File(path+"/"+idString+".jpg");
+		file.createNewFile();
+		ImageIO.write(bufferedImage, "jpg", file);
 		
-		User user = new User();
-		user.setId(id);
+		List<User> users = um.findByProp("id", idString, null, null, 1, 1);
+		User user = users.get(0);
 		user.setName(name);
 		user.setGender(gender.equals("M"));
 		user.setCampus(campus);
 		user.setContact(contact);
 		user.setAddress(address);
+		user.setPhotoPath(path);
 		
 		int result = um.update(user);
+		System.out.println(result);
 		if (result > 0)
 			response.getWriter().println("1");
 		else if (result == 0)

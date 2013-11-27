@@ -14,7 +14,7 @@ public class RequestDao {
 	public RequestDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "root", null);
+			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			//TODO
@@ -131,6 +131,7 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
+			sql += " AND status = null";  
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
@@ -154,7 +155,7 @@ public class RequestDao {
 	public List<Request> findAllAvailableRequests(Integer currentPage, Integer pageSize) {
 		List<Request> requests = new ArrayList<Request>();
 		try {
-			String sql = "SELECT * FROM request WHERE status = 0 ORDER BY post_time desc ";
+			String sql = "SELECT * FROM request WHERE status = 0 ORDER BY request_time desc ";
 			
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			sql += " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 

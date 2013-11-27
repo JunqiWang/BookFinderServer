@@ -23,6 +23,22 @@
     <servlet-class>com.wilddynamos.bookappserver.servlet.SignupServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>EditProfile</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.EditProfileServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetRequests</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.RequestListServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DeclineAll</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.DeclineAllServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AcceptRequest</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.profile.AcceptRequestServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
   </servlet>
@@ -69,6 +85,22 @@
   <servlet-mapping>
     <servlet-name>Signup</servlet-name>
     <url-pattern>/Signup</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EditProfile</servlet-name>
+    <url-pattern>/EditProfile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetRequests</servlet-name>
+    <url-pattern>/GetRequests</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DeclineAll</servlet-name>
+    <url-pattern>/DeclineAll</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AcceptRequest</servlet-name>
+    <url-pattern>/AcceptRequest</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
