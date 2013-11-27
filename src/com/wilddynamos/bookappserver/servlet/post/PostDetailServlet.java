@@ -94,7 +94,7 @@ public class PostDetailServlet extends HttpServlet {
 		jo.put("hasRequested", hasRequested);
 		
 		json.add(jo);
-		
+		System.out.println(jo);
 		response.getWriter().println(json.toString());
 	}
 
