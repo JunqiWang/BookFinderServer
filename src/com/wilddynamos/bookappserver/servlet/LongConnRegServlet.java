@@ -54,6 +54,7 @@ public class LongConnRegServlet extends HttpServlet {
 		@Override
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
+			actx.getRequest().setAttribute("id", id);//?????????
 
 			synchronized (ActiveUserPool.userId2bookIds) {
 

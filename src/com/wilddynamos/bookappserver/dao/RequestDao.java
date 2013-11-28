@@ -14,7 +14,7 @@ public class RequestDao {
 	public RequestDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
+			conn = DriverManager.getConnection(UserDao.address, "root", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			//TODO
@@ -128,20 +128,21 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
-			sql += " AND status is null";
+//			sql += " AND status is null";
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
-			while(rs.next())
+			while(rs.next()) {System.out.println(rs.getBoolean(3) + "," + rs.getInt(1));
 				requests.add(new Request(rs.getInt(1), 
 									     rs.getString(2), 
-									     rs.getObject(3) == null ? null : rs.getBoolean(3),
+									     (rs.getObject(3) == null ? null : rs.getBoolean(3)),
 									     rs.getDate(4), 
 									     rs.getInt(5), 
 									     rs.getInt(6)));
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -47,7 +47,7 @@ public class GetMyBooksServlet extends HttpServlet {
 		
 		//get my requesting/requested books
 		RequestManager rm = new RequestManager();
-		List<Request> requesters = rm.findByProp("requester_id", id, null, null, null, 1);
+		List<Request> requesters = rm.findByProp("requester_id", id, null, null, Integer.MAX_VALUE, 1);
 		rm.close();
 		
 		for(Request r: requesters) {
