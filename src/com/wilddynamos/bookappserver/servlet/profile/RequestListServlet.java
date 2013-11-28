@@ -67,7 +67,6 @@ public class RequestListServlet extends HttpServlet {
 				}
 				byte[] bytes = bos.toByteArray();
 				photo = new String(bytes, Charset.forName("ISO-8859-1"));
-				System.out.println("haha");
 				fis.close();
 			}
 			jo.put("photo", photo);
