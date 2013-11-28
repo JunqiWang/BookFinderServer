@@ -70,7 +70,6 @@ public class BookDetailServlet extends HttpServlet {
 				if(r.getBookId().equals(Integer.parseInt(id))) {
 					if(r.getStatus() == null)
 						requesterNum ++;
-					System.out.println(requesterNum);
 
 					if(r.getStatus() != null && r.getStatus()) {
 						hasMadeRespond = true;
