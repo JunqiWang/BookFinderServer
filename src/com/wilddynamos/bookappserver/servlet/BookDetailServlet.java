@@ -66,12 +66,8 @@ public class BookDetailServlet extends HttpServlet {
 			RequestManager rm = new RequestManager();
 			List<Request> requests = rm.findByProp("book_id", id, null, null, null, 1);
 			rm.close();
-			System.out.println(id);
-			System.out.println(requests.size());
 			for(Request r: requests) {
-				System.out.println("hahaha");
 				if(r.getBookId().equals(Integer.parseInt(id))) {
-					System.out.println("hahaahha");
 					if(r.getStatus() == null)
 						requesterNum ++;
 					System.out.println(requesterNum);

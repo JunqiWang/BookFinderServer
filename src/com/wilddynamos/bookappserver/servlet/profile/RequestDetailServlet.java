@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.model.User;
+import com.wilddynamos.bookappserver.service.RequestManager;
 import com.wilddynamos.bookappserver.service.UserManager;
 
 public class RequestDetailServlet extends HttpServlet {
@@ -29,9 +31,15 @@ public class RequestDetailServlet extends HttpServlet {
 		response.setContentType("text/html");
 		
 		String id = request.getParameter("id");
-
+		
+		RequestManager rm = new RequestManager();
+		List<Request> requesters = rm.findByProp("id", id, null, null, null, 1);
+		rm.close();
+		
+		int requesterId = requesters.get(0).getRequesterId();
+		
 		UserManager um = new UserManager();
-		List<User> users = um.findByProp("id", id, null, null, null, 1);
+		List<User> users = um.findByProp("id", String.valueOf(requesterId), null, null, null, 1);
 		um.close();
 		
 		JSONArray json = new JSONArray();
