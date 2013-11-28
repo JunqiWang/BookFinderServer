@@ -23,8 +23,9 @@ public class LongConnRegServlet extends HttpServlet {
 		if(bookId != null) {
 			if(bookId > 0)
 				out.println("Req" + bookId);
-			else
+			else {System.out.println("Res" + (-bookId));
 				out.println("Res" + (-bookId));
+			}
 		} else
 			out.println("Req");
 		// this line is important
@@ -40,7 +41,7 @@ public class LongConnRegServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private static class MessageSender extends Thread {
+	private class MessageSender extends Thread {
 
 		AsyncContext actx;
 
