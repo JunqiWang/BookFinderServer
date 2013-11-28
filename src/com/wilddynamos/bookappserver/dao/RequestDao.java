@@ -71,7 +71,7 @@ public class RequestDao {
 	public int update(Request request) {
 		try {
 			return stmt.executeUpdate("UPDATE request SET "
-									   + "status = " + request.getStatus() + ", "
+									   + "status = " + request.getStatus() + " "
 									   + "WHERE id = " + request.getId() + ";");
 		} catch(Exception e) {
 			e.printStackTrace();
