@@ -36,12 +36,12 @@ public class RequestDao {
 			return stmt.executeUpdate(
 					"INSERT INTO request(id, message, status, "
 					+ "request_time, book_id, requester_id)"
-					+ " VALUES(null, '"
-					+ request.getMessage() + "', "
-					+ request.getStatus() + ", '"
-					+ new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(request.getRequestTime()) + "', '"
-					+ request.getBookId() + "', '"
-					+ request.getRequesterId() + "');");
+					+ " VALUES(null, "
+					+ (request.getMessage() == null ? null : "'" + request.getMessage() + "'") + ", "
+					+ null + ", '"
+					+ new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(request.getRequestTime()) + "', "
+					+ request.getBookId() + ", "
+					+ request.getRequesterId() + ");");
 			
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -71,12 +71,8 @@ public class RequestDao {
 	public int update(Request request) {
 		try {
 			return stmt.executeUpdate("UPDATE request SET "
-									   + "message = '" + request.getMessage() + "', "
 									   + "status = " + request.getStatus() + ", "
-									   + "request_time = '" + request.getRequestTime() + "', "
-									   + "book_id = '" + request.getBookId() + "', "
-									   + "requester_id = '" + request.getRequesterId() + "' "
-									   + "WHERE id = '" + request.getId() + "';");
+									   + "WHERE id = " + request.getId() + ";");
 		} catch(Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -102,7 +98,7 @@ public class RequestDao {
 			while(rs.next())
 				requests.add(new Request(rs.getInt(1), 
 								   rs.getString(2), 
-								   rs.getBoolean(3),
+								   rs.getObject(3) == null ? null : rs.getBoolean(3),
 								   rs.getDate(4), 
 								   rs.getInt(5), 
 								   rs.getInt(6)));
@@ -116,6 +112,7 @@ public class RequestDao {
 	
 	public List<Request> findByProp(String name, String value, 
 			String order, Integer currentPage, Integer pageSize, int condition) {
+		
 		List<Request> requests = new ArrayList<Request>();
 		try {
 			String sql = "SELECT * FROM request WHERE " + name;
@@ -131,12 +128,11 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
-//			sql += " AND status = null";
-			System.out.println(sql);
+			sql += " AND status is null";
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
-			System.out.println(sql);
+
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next())
@@ -146,31 +142,6 @@ public class RequestDao {
 									     rs.getDate(4), 
 									     rs.getInt(5), 
 									     rs.getInt(6)));
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return requests;
-	}
-	
-	public List<Request> findAllAvailableRequests(Integer currentPage, Integer pageSize) {
-		List<Request> requests = new ArrayList<Request>();
-		try {
-			String sql = "SELECT * FROM request WHERE status = 0 ORDER BY request_time desc ";
-			
-			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
-			sql += " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
-				   + pageSize + ";";
-			
-			ResultSet rs = stmt.executeQuery(sql);
-
-			while(rs.next())
-				requests.add(new Request(rs.getInt(1), 
-										 rs.getString(2), 
-										 rs.getBoolean(3),
-										 rs.getDate(4), 
-										 rs.getInt(5), 
-										 rs.getInt(6)));
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
