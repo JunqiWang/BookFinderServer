@@ -1,6 +1,7 @@
 package com.wilddynamos.bookappserver.servlet.post;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -46,9 +47,12 @@ public class RequestBookServlet extends HttpServlet {
 		bm.close();
 		int ownerId = books.get(0).getOwnerId();
 		
-		synchronized(ActiveUserPool.ownerIds) {
-			ActiveUserPool.ownerIds.add(ownerId);
-			ActiveUserPool.ownerIds.notifyAll();
+		synchronized (ActiveUserPool.userId2bookIds) {
+			if(ActiveUserPool.userId2bookIds.get(ownerId) == null)
+				ActiveUserPool.userId2bookIds.put(ownerId, new ArrayList<Integer>());
+			ActiveUserPool.userId2bookIds.get(ownerId).add(id);
+			
+			ActiveUserPool.userId2bookIds.notifyAll();
 		}
 		
 		if(row < 0)
