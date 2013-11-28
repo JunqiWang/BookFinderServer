@@ -14,7 +14,7 @@ public class RequestDao {
 	public RequestDao() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "root", null);
+			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
 			stmt = conn.createStatement();
 		} catch (Exception e) {
 			//TODO
@@ -70,12 +70,12 @@ public class RequestDao {
 	
 	public int update(Request request) {
 		try {
-			return stmt.executeUpdate("UPDATE user SET "
+			return stmt.executeUpdate("UPDATE request SET "
 									   + "message = '" + request.getMessage() + "', "
 									   + "status = " + request.getStatus() + ", "
 									   + "request_time = '" + request.getRequestTime() + "', "
 									   + "book_id = '" + request.getBookId() + "', "
-									   + "requester_id = '" + request.getRequesterId() + "', "
+									   + "requester_id = '" + request.getRequesterId() + "' "
 									   + "WHERE id = '" + request.getId() + "';");
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -131,10 +131,12 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
+//			sql += " AND status = null";
+			System.out.println(sql);
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
-			
+			System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 
 			while(rs.next())

@@ -25,9 +25,15 @@ public class DeclineAllServlet extends HttpServlet {
 		RequestManager rm = new RequestManager();
 		List<Request> requesters = rm.findByProp("book_id", bookId, "request_time", 
 				null, null, 1);
-
+		
+		System.out.println(requesters.size());
+		
 		for(Request r: requesters) {
-			r.setStatus(null);
+			r.setStatus(false);
+		}
+		
+		for(Request r: requesters) {
+			System.out.println(r.getStatus());;
 		}
 		
 		for(Request r: requesters) {

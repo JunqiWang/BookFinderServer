@@ -39,16 +39,20 @@ public class RequestListServlet extends HttpServlet {
 				currentPage, null, 1);
 		rm.close();
 		
+		System.out.println(bookId);
+		
 		JSONArray json = new JSONArray();
 		String path = this.getServletContext().getRealPath("/profile_photo");
+		System.out.println(path);
 		
 		for(Request r: requesters) {
 			JSONObject jo = new JSONObject();
 			
 			jo.put("id", r.getId());
+			System.out.println(r.getRequesterId());
 			jo.put("name", r.getRequester().getName());
 
-			File file = new File(path + "/" + String.valueOf(r.getId()) + ".jpg");
+			File file = new File(path + "/" + String.valueOf(r.getRequesterId()) + ".jpg");
 			String photo = null;
 			if(file.exists() && file.isFile()) {
 				FileInputStream fis = new FileInputStream(file);
@@ -63,6 +67,7 @@ public class RequestListServlet extends HttpServlet {
 				}
 				byte[] bytes = bos.toByteArray();
 				photo = new String(bytes, Charset.forName("ISO-8859-1"));
+				System.out.println("haha");
 				fis.close();
 			}
 			jo.put("photo", photo);
@@ -70,6 +75,7 @@ public class RequestListServlet extends HttpServlet {
 			json.add(jo);
 		}
 		System.out.println(json.size());
+		System.out.println(json);
 		response.getWriter().println(json.toString());
 	}
 
