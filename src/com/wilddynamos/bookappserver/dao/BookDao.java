@@ -77,16 +77,16 @@ public class BookDao {
 		try {
 			return stmt.executeUpdate("UPDATE book SET "
 									   + "name = '" + book.getName() + "', "
-									   + "price = '" + book.getPrice() + "', "
+									   + "price = " + book.getPrice() + ", "
 									   + "per = " + book.getPer() + ", "
-									   + "available_time = '" + book.getAvailableTime() + "', "
-									   + "likes = '" + book.getLikes() + "', "
+									   + "available_time = " + book.getAvailableTime() + ", "
+									   + "likes = " + book.getLikes() + ", "
 									   + "s_or_r = " + book.getsOrR() + ", "
 									   + "status = " + book.getStatus() + ", "
 									   + "description = '" + book.getDescription() + "', "
 									   + "post_time = '" + book.getPostTime() + "', "
-									   + "owner_id = '" + book.getOwnerId() + "' "
-									   + "WHERE id = '" + book.getId() + "';");
+									   + "owner_id = " + book.getOwnerId() + " "
+									   + "WHERE id = " + book.getId() + ";");
 		} catch(Exception e) {
 			e.printStackTrace();
 			return -1;
