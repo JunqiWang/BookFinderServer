@@ -1,6 +1,7 @@
 package com.wilddynamos.bookappserver.servlet.profile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import com.wilddynamos.bookappserver.model.Book;
 import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.service.BookManager;
 import com.wilddynamos.bookappserver.service.RequestManager;
+import com.wilddynamos.bookappserver.servlet.ActiveUserPool;
 
 public class AcceptRequestServlet extends HttpServlet {
 	
@@ -47,6 +49,17 @@ public class AcceptRequestServlet extends HttpServlet {
 		Book book = books.get(0);
 		book.setStatus(true);
 		bm.update(book);
+		
+		synchronized (ActiveUserPool.userId2bookIds) {
+			for(Request r: requesters) {
+				if(ActiveUserPool.userId2bookIds.get(r.getRequesterId()) == null)
+					ActiveUserPool.userId2bookIds.put(r.getRequesterId(), new ArrayList<Integer>());
+				ActiveUserPool.userId2bookIds.get(r.getRequesterId()).add(- Integer.parseInt(bookId));
+				System.out.println(ActiveUserPool.userId2bookIds.get(r.getRequesterId()).get(0));
+			}
+			
+			ActiveUserPool.userId2bookIds.notifyAll();
+		}
 		
 		response.getWriter().println(String.valueOf(result));
 	}
