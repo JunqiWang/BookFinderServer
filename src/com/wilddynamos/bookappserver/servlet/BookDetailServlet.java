@@ -66,17 +66,17 @@ public class BookDetailServlet extends HttpServlet {
 			RequestManager rm = new RequestManager();
 			List<Request> requests = rm.findByProp("book_id", id, null, null, null, 1);
 			rm.close();
-			
+
 			for(Request r: requests) {
 				if(r.getBookId().equals(Integer.parseInt(id))) {
+					if(r.getStatus() == null)
+						requesterNum ++;
+
 					if(r.getStatus() != null && r.getStatus()) {
 						hasMadeRespond = true;
 						requesterId = r.getRequesterId();
 						break;
 					}
-					
-					if(r.getStatus() == null)
-						requesterNum ++;
 				}
 			}
 		}
@@ -158,7 +158,7 @@ public class BookDetailServlet extends HttpServlet {
 		
 		//is my request begin
 		if(isRequested != null)
-			jo.put("hasResponded", hasResponded);System.out.println(hasResponded);
+			jo.put("hasResponded", hasResponded);
 		//is my request end
 		
 		json.add(jo);
