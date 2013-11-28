@@ -75,7 +75,7 @@ public class BookDetailServlet extends HttpServlet {
 						break;
 					}
 					
-					if(r.getStatus() != null)
+					if(r.getStatus() == null)
 						requesterNum ++;
 				}
 			}
