@@ -1,12 +1,16 @@
 package com.wilddynamos.bookappserver.servlet.profile;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.wilddynamos.bookappserver.model.Book;
 import com.wilddynamos.bookappserver.model.Request;
+import com.wilddynamos.bookappserver.service.BookManager;
 import com.wilddynamos.bookappserver.service.RequestManager;
 
 public class AcceptRequestServlet extends HttpServlet {
@@ -24,8 +28,7 @@ public class AcceptRequestServlet extends HttpServlet {
 		String requesterId = request.getParameter("requesterId");
 		
 		RequestManager rm = new RequestManager();
-		List<Request> requesters = rm.findByProp("book_id", bookId, "request_time", 
-				null, null, 1);
+		List<Request> requesters = rm.findByProp("book_id", bookId, "request_time", null, null, 1);
 
 		for(Request r: requesters) {
 			if (r.getId() == Integer.parseInt(requesterId))
@@ -38,6 +41,12 @@ public class AcceptRequestServlet extends HttpServlet {
 		}
 		
 		rm.close();
+		
+		BookManager bm = new BookManager();
+		List<Book> books = bm.findByProp("id", bookId, null, null, null, 1);
+		Book book = books.get(0);
+		book.setStatus(true);
+		bm.update(book);
 		
 		response.getWriter().println(String.valueOf(result));
 	}
