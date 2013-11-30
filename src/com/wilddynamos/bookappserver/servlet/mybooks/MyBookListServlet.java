@@ -68,8 +68,6 @@ public class MyBookListServlet extends HttpServlet {
 		}
 		
 		bm.close();
-		System.out.println(json.size());
-		System.out.println(json);
 		response.getWriter().println(json.toString());
 	}
 

@@ -19,49 +19,48 @@ import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.service.RequestManager;
 
 public class RequestListServlet extends HttpServlet {
-	
+
 	private static final long serialVersionUID = 2227498862027366610L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
-		
-		Integer currentPage = Integer.parseInt(request.getParameter("currentPage"));
+
+		Integer currentPage = Integer.parseInt(request
+				.getParameter("currentPage"));
 		String bookId = request.getParameter("id");
-		
-		if(currentPage == null)
+
+		if (currentPage == null)
 			currentPage = 1;
 
 		RequestManager rm = new RequestManager();
-		List<Request> requesters = rm.findByProp("book_id", bookId, "request_time", 
-				currentPage, null, 1);
+		List<Request> requesters = rm.findByProp("book_id", bookId,
+				"request_time", currentPage, null, 1);
 		rm.close();
-		
-		System.out.println(bookId);
-		
+
 		JSONArray json = new JSONArray();
 		String path = this.getServletContext().getRealPath("/profile_photo");
 		System.out.println(path);
-		
-		for(Request r: requesters) {
+
+		for (Request r : requesters) {
 			JSONObject jo = new JSONObject();
-			
+
 			jo.put("id", r.getRequesterId());
 			jo.put("name", r.getRequester().getName());
 
-			File file = new File(path + "/" + String.valueOf(r.getRequesterId()) + ".jpg");
+			File file = new File(path + "/"
+					+ String.valueOf(r.getRequesterId()) + ".jpg");
 			String photo = null;
-			if(file.exists() && file.isFile()) {
+			if (file.exists() && file.isFile()) {
 				FileInputStream fis = new FileInputStream(file);
 				ByteArrayOutputStream bos = new ByteArrayOutputStream();
 				byte[] buf = new byte[1024 * 1024];
-			
+
 				try {
-					for(int readNum; (readNum = fis.read(buf)) != -1;)
+					for (int readNum; (readNum = fis.read(buf)) != -1;)
 						bos.write(buf, 0, readNum);
-				} catch(Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				byte[] bytes = bos.toByteArray();
@@ -69,17 +68,15 @@ public class RequestListServlet extends HttpServlet {
 				fis.close();
 			}
 			jo.put("photo", photo);
-			
+
 			json.add(jo);
 		}
-		System.out.println(json.size());
-		System.out.println(json);
 		response.getWriter().println(json.toString());
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
 		doGet(request, response);
 	}
 }
