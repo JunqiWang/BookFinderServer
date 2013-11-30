@@ -14,25 +14,26 @@ public class LongConnRegServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
-		// this line is important
-		response.setContentType("text/html; charset=UTF-8");
-		
-		Integer bookId = (Integer) request.getAttribute("bookId");
+		if (response != null) {
+			// this line is important
+			response.setContentType("text/html; charset=UTF-8");
 
-		PrintWriter out = response.getWriter();
-		if(bookId != null) {
-			if(bookId > 0)
-				out.println("Req" + bookId);
-			else {System.out.println("Res" + (-bookId));
-				out.println("Res" + (-bookId));
-			}
-		} else
-			out.println("Req");
-		// this line is important
-		out.flush();
+			Integer bookId = (Integer) request.getAttribute("bookId");
 
-		request.startAsync(request, response);
-		new MessageSender(request.getAsyncContext()).start();
+			PrintWriter out = response.getWriter();
+			if (bookId != null) {
+				if (bookId > 0)
+					out.println("Req" + bookId);
+				else
+					out.println("Res" + (-bookId));
+			} else
+				out.println("Req");
+			// this line is important
+			out.flush();
+
+			request.startAsync(request, response);
+			new MessageSender(request.getAsyncContext()).start();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -54,18 +55,10 @@ public class LongConnRegServlet extends HttpServlet {
 		@Override
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
-			actx.getRequest().setAttribute("id", id);//?????????
+			actx.getRequest().setAttribute("id", id);// ?????????
 
 			synchronized (ActiveUserPool.userId2bookIds) {
 
-				// synchronized(ActiveUserPool.ownerIds) {
-				// try {
-				// while(!ActiveUserPool.ownerIds.contains(id))
-				// ActiveUserPool.ownerIds.wait();
-				//
-				// ActiveUserPool.ownerIds.remove(id);
-				// } catch(Exception e) {
-				// }
 				try {
 					while (!ActiveUserPool.userId2bookIds.containsKey(id))
 						ActiveUserPool.userId2bookIds.wait();

@@ -3,12 +3,8 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="BookFinder" version="3.0">
-	<description>rent sell</description>
-	<display-name>Book</display-name>
-	<servlet>
-		<servlet-name>User</servlet-name>
-		<servlet-class>com.wilddynamos.bookappserver.servlet.UserServlet</servlet-class>
-	</servlet>
+	<description>Book Finder, campus rent or sell</description>
+	<display-name>Book Finder</display-name>
 	<servlet>
 		<servlet-name>Login</servlet-name>
 		<servlet-class>com.wilddynamos.bookappserver.servlet.LoginServlet</servlet-class>
@@ -74,10 +70,10 @@
 		<servlet-name>PostOrEditBook</servlet-name>
 		<servlet-class>com.wilddynamos.bookappserver.servlet.mybooks.PostEditBookServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>User</servlet-name>
-		<url-pattern>/ServeUser</url-pattern>
-	</servlet-mapping>
+	<servlet>
+		<servlet-name>Profile</servlet-name>
+		<servlet-class>com.wilddynamos.bookappserver.servlet.profile.ProfileServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/Login</url-pattern>
@@ -141,6 +137,10 @@
 	<servlet-mapping>
 		<servlet-name>PostOrEditBook</servlet-name>
 		<url-pattern>/PostEditBook</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Profile</servlet-name>
+		<url-pattern>/Profile</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>30</session-timeout>
