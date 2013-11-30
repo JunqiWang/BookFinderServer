@@ -1,4 +1,4 @@
-package com.wilddynamos.bookappserver.servlet;
+package com.wilddynamos.bookappserver.servlet.profile;
 
 import java.io.*;
 import java.util.Date;

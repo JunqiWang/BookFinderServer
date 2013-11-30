@@ -22,10 +22,6 @@
 		<servlet-class>com.wilddynamos.bookappserver.servlet.SignupServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>ForgotPwd</servlet-name>
-		<servlet-class>com.wilddynamos.bookappserver.servlet.ForgotPwdServlet</servlet-class>
-	</servlet>
-	<servlet>
 		<servlet-name>Logout</servlet-name>
 		<servlet-class>com.wilddynamos.bookappserver.servlet.LogoutServlet</servlet-class>
 	</servlet>
@@ -91,6 +87,14 @@
 		<servlet-name>EditProfile</servlet-name>
 		<servlet-class>com.wilddynamos.bookappserver.servlet.profile.EditProfileServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>ForgotPwd</servlet-name>
+		<servlet-class>com.wilddynamos.bookappserver.servlet.profile.ForgotPwdServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>ChangePwd</servlet-name>
+		<servlet-class>com.wilddynamos.bookappserver.servlet.profile.ChangePwdServlet</servlet-class>
+	</servlet>
 	<!-- Profile End -->
 
 	<!-- Mappings -->
@@ -106,10 +110,6 @@
 	<servlet-mapping>
 		<servlet-name>Signup</servlet-name>
 		<url-pattern>/Signup</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ForgotPwd</servlet-name>
-		<url-pattern>/ForgotPwd</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>Logout</servlet-name>
@@ -177,6 +177,14 @@
 	<servlet-mapping>
 		<servlet-name>EditProfile</servlet-name>
 		<url-pattern>/EditProfile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ForgotPwd</servlet-name>
+		<url-pattern>/ForgotPwd</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>ChangePwd</servlet-name>
+		<url-pattern>/ChangePwd</url-pattern>
 	</servlet-mapping>
 	<!-- Profile End -->
 
