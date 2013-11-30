@@ -148,4 +148,43 @@ public class RequestDao {
 		
 		return requests;
 	}
+	
+	public List<Request> findByBookAndRequester(String bookId, String requesterId, 
+			String order, Integer currentPage, Integer pageSize, int condition) {
+		
+		List<Request> requests = new ArrayList<Request>();
+		try {
+			String sql = "SELECT * FROM request WHERE book_id";
+			switch(condition) {
+				case 1: sql += " = '" + bookId + "'"; break;
+				case 2: sql += " like '%" + bookId + "%'"; break;
+				case 3: sql += " in " + bookId + ""; break;
+				case 4: sql += " < '" + bookId + "'"; break;
+				case 5: sql += " <= '" + bookId + "'"; break;
+				case 6: sql += " > '" + bookId + "'"; break;
+				case 7: sql += " >= '" + bookId + "'"; break;
+				default: sql += " = '" + bookId + "'";
+			}
+			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
+			
+			sql += " AND requester_id = '" + requesterId + "'";
+			sql += " ORDER BY " + order 
+				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
+				   + pageSize + ";";
+
+			ResultSet rs = stmt.executeQuery(sql);
+
+			while(rs.next())
+				requests.add(new Request(rs.getInt(1), 
+									     rs.getString(2), 
+									     rs.getObject(3) == null ? null : rs.getBoolean(3),
+									     rs.getDate(4), 
+									     rs.getInt(5), 
+									     rs.getInt(6)));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return requests;
+	}
 }

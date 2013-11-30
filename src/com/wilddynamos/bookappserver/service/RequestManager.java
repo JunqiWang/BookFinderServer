@@ -60,4 +60,17 @@ public class RequestManager {
 		return requests;
 	}
 	
+	public List<Request> findByBookAndRequester(String bookId, String requesterId, String order, 
+			Integer currentPage, Integer pageSize, int condition) {
+		
+		List<Request> requests =  requestDao.findByBookAndRequester(bookId, requesterId, order, currentPage, pageSize, condition);
+		
+		UserManager um = new UserManager();
+		for(Request request: requests)
+			request.setRequester(um.findByProp("id", request.getRequesterId() + "", null, null, 1, 1).get(0));
+		um.close();
+		
+		return requests;
+	}
+	
 }

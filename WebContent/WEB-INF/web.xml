@@ -68,6 +68,10 @@
     <servlet-class>com.wilddynamos.bookappserver.servlet.post.RequestBookServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>WithdrawRequest</servlet-name>
+    <servlet-class>com.wilddynamos.bookappserver.servlet.post.WithdrawRequestServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>PostOrEditBook</servlet-name>
     <servlet-class>com.wilddynamos.bookappserver.servlet.mybooks.PostEditBookServlet</servlet-class>
   </servlet>
@@ -110,6 +114,10 @@
   <servlet-mapping>
     <servlet-name>GetRequestDetail</servlet-name>
     <url-pattern>/GetRequestDetail</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>WithdrawRequest</servlet-name>
+    <url-pattern>/WithdrawRequest</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>GetMyBooks</servlet-name>
