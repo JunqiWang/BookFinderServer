@@ -1,7 +1,6 @@
 package com.wilddynamos.bookappserver.servlet.mybooks;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +12,7 @@ import com.wilddynamos.bookappserver.service.RequestManager;
 
 public class WithdrawRequestServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 4953808045786008751L;
+	private static final long serialVersionUID = -4192737679041100585L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -24,8 +23,8 @@ public class WithdrawRequestServlet extends HttpServlet {
 		String requesterId = request.getParameter("requesterId");
 		
 		RequestManager rm = new RequestManager();
-		List<Request> requesters = rm.findByBookAndRequester(bookId, requesterId, null, null, null, 1);
-		int result = rm.removeById(requesters.get(0).getId());
+		Request req = rm.findByBookAndRequester(bookId, requesterId);
+		int result = rm.removeById(req.getId());
 		rm.close();
 		
 		response.getWriter().println(String.valueOf(result));

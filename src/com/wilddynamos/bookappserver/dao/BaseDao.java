@@ -15,6 +15,8 @@ public abstract class BaseDao<E> {
 	public static final String USER_NAME = "root";
 
 	public static final String PASSWORD = null;
+	
+	public static final int DEFAULT_PAGESIZE =10;
 
 	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
