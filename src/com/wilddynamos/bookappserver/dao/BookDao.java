@@ -85,6 +85,7 @@ public class BookDao {
 									   + "status = " + book.getStatus() + ", "
 									   + "description = '" + book.getDescription() + "', "
 									   + "post_time = '" + book.getPostTime() + "', "
+									   + "cover_path = '" + book.getCoverPath() + "', "
 									   + "owner_id = " + book.getOwnerId() + " "
 									   + "WHERE id = " + book.getId() + ";");
 		} catch(Exception e) {

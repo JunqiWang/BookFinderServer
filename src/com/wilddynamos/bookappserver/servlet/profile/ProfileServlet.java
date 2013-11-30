@@ -27,7 +27,7 @@ public class ProfileServlet extends HttpServlet {
 
 		response.setCharacterEncoding("UTF-8");
 
-		String id = request.getParameter("id");System.out.println(id);
+		String id = request.getParameter("id");
 
 		UserManager um = new UserManager();
 		List<User> users = um.findByProp("id", id, null, null, null, 1);
@@ -72,7 +72,7 @@ public class ProfileServlet extends HttpServlet {
 
 		json.add(jo);
 
-		response.getWriter().println(json.toString());System.out.println(json);
+		response.getWriter().println(json.toString());
 	}
 
 	protected void doPost(HttpServletRequest request,
