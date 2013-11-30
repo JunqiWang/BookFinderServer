@@ -2,51 +2,48 @@ package com.wilddynamos.bookappserver.model;
 
 import java.util.Date;
 
-public class Request {
-	
-	private Integer id;
-	
+public class Request extends BaseEntity {
+
+	private static final long serialVersionUID = -4171638851580115767L;
+
 	private String message;
-	
+
 	private Boolean status;
-	
+
 	private Date requestTime;
-	
+
 	private Integer bookId;
-	
+
 	private Book book;
-	
+
 	private Integer requesterId;
-	
+
 	private User requester;
 
 	public Request() {
-	}
-	
-	public Request(String message, Date requestTime, Integer bookId, Integer requesterId) {
 		super();
+	}
+
+	public Request(String message, Date requestTime, Integer bookId,
+			Integer requesterId) {
+		super();
+		
 		this.message = message;
 		this.requestTime = requestTime;
 		this.bookId = bookId;
 		this.requesterId = requesterId;
 	}
 
-	public Request(Integer id, String message, Boolean status, Date requestTime,
-			Integer bookId, Integer requesterId) {
+	public Request(Integer id, String message, Boolean status,
+			Date requestTime, Integer bookId, Integer requesterId) {
+		super();
+		
 		this.id = id;
 		this.message = message;
 		this.status = status;
 		this.requestTime = requestTime;
 		this.bookId = bookId;
 		this.requesterId = requesterId;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getMessage() {

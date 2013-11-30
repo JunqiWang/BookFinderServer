@@ -6,29 +6,12 @@ import java.util.*;
 
 import com.wilddynamos.bookappserver.model.Request;
 
-public class RequestDao {
+public class RequestDao extends BaseDao<Request> {
+	
 	private static final Integer DEFAULT_REQUEST_PAGESIZE = 10;
-	private Connection conn;
-	private Statement stmt;
 	
 	public RequestDao() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "zhe", null);
-			stmt = conn.createStatement();
-		} catch (Exception e) {
-			//TODO
-			e.printStackTrace();
-		}
-	}
-	
-	public void close() {
-		try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		super();
 	}
 	
 	public int add(Request request) {
@@ -128,20 +111,20 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
-			sql += " AND status is null";
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
 
 			ResultSet rs = stmt.executeQuery(sql);
 
-			while(rs.next())
+			while(rs.next()) {System.out.println(rs.getBoolean(3) + "," + rs.getInt(1));
 				requests.add(new Request(rs.getInt(1), 
 									     rs.getString(2), 
-									     rs.getObject(3) == null ? null : rs.getBoolean(3),
+									     (rs.getObject(3) == null ? null : rs.getBoolean(3)),
 									     rs.getDate(4), 
 									     rs.getInt(5), 
 									     rs.getInt(6)));
+			}
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

@@ -16,9 +16,9 @@ import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.service.BookManager;
 import com.wilddynamos.bookappserver.service.RequestManager;
 
-public class GetMyBooksServlet extends HttpServlet {
+public class MyBookListServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 4953808045786008751L;
+	private static final long serialVersionUID = -3430769765327644516L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -47,7 +47,7 @@ public class GetMyBooksServlet extends HttpServlet {
 		
 		//get my requesting/requested books
 		RequestManager rm = new RequestManager();
-		List<Request> requesters = rm.findByProp("requester_id", id, null, null, null, 1);
+		List<Request> requesters = rm.findByProp("requester_id", id, null, null, Integer.MAX_VALUE, 1);
 		rm.close();
 		
 		for(Request r: requesters) {
@@ -68,8 +68,6 @@ public class GetMyBooksServlet extends HttpServlet {
 		}
 		
 		bm.close();
-		System.out.println(json.size());
-		System.out.println(json);
 		response.getWriter().println(json.toString());
 	}
 

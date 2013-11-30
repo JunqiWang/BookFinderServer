@@ -41,9 +41,8 @@ public class PostEditBookServlet extends HttpServlet {
 		String description = request.getParameter("description");
 
 		String imageString = request.getParameter("cover");
-		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookAppServer/WebContent/book_cover";//this.getServletContext().getRealPath("/book_cover");
-		byte[] coverImage = imageString.getBytes(Charset
-				.forName("ISO-8859-1"));
+		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookAppServer/WebContent/book_cover";// this.getServletContext().getRealPath("/book_cover");
+		byte[] coverImage = imageString.getBytes(Charset.forName("ISO-8859-1"));
 		InputStream in = new ByteArrayInputStream(coverImage);
 		BufferedImage bufferedImage = ImageIO.read(in);
 		// Getting exception at this line
@@ -55,6 +54,11 @@ public class PostEditBookServlet extends HttpServlet {
 			book = bm.findByProp("id", bookId, null, null, null, 1).get(0);
 			ImageIO.write(bufferedImage, "png", new File(path + "/" + bookId
 					+ ".png"));
+			File file = new File(path + "/" + book.getCoverPath());
+			try {
+				file.delete();
+			} catch (Exception e) {
+			}
 			book.setCoverPath(bookId + ".png");
 		} else {
 			book = new Book();
@@ -70,7 +74,6 @@ public class PostEditBookServlet extends HttpServlet {
 			ImageIO.write(bufferedImage, "png",
 					new File(path + "/" + coverPath));
 			book.setCoverPath(coverPath);
-			System.out.println(path + "/" + coverPath);
 		}
 
 		book.setName(name);

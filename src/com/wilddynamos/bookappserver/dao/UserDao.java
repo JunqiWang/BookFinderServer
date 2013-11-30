@@ -5,32 +5,12 @@ import java.util.*;
 
 import com.wilddynamos.bookappserver.model.User;
 
-public class UserDao {
-	
-	public static final String address = "jdbc:mysql://10.0.23.238:3306/book_app";
+public class UserDao extends BaseDao<User> {
 	
 	private static final Integer DEFAULT_USER_PAGESIZE = 10;
-	private Connection conn;
-	private Statement stmt;
 	
 	public UserDao() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(address, "zhe", null);
-			stmt = conn.createStatement();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	
-	public void close() {
-		try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		super();
 	}
 	
 	public int add(User user) {
