@@ -20,7 +20,7 @@ import com.wilddynamos.bookappserver.service.RequestManager;
 
 public class RequestListServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 4953808045786008751L;
+	private static final long serialVersionUID = 2227498862027366610L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
@@ -48,8 +48,7 @@ public class RequestListServlet extends HttpServlet {
 		for(Request r: requesters) {
 			JSONObject jo = new JSONObject();
 			
-			jo.put("id", r.getId());
-			System.out.println(r.getRequesterId());
+			jo.put("id", r.getRequesterId());
 			jo.put("name", r.getRequester().getName());
 
 			File file = new File(path + "/" + String.valueOf(r.getRequesterId()) + ".jpg");

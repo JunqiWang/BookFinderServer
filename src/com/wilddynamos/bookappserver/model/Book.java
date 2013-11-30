@@ -2,39 +2,42 @@ package com.wilddynamos.bookappserver.model;
 
 import java.util.Date;
 
-public class Book {
-	
-	private Integer id;
-	
+public class Book extends BaseEntity {
+
+	private static final long serialVersionUID = 1766341277163675267L;
+
 	private String name;
-	
+
 	private Integer price;
-	
+
 	private Boolean per;
-	
+
 	private Integer availableTime;
-	
+
 	private Integer likes;
-	
+
 	private Boolean sOrR;
-	
+
 	private Boolean status;
-	
+
 	private String description;
-	
+
 	private Date postTime;
-	
+
 	private String coverPath;
-	
+
 	private Integer ownerId;
-	
+
 	private User owner;
-	
+
 	public Book() {
+		super();
 	}
 
 	public Book(String name, Integer price, Boolean per, Integer availableTime,
 			Boolean sOrR, String description, Integer ownerId) {
+		super();
+
 		this.name = name;
 		this.price = price;
 		this.per = per;
@@ -47,6 +50,8 @@ public class Book {
 	public Book(Integer id, String name, Integer price, Boolean per,
 			Integer availableTime, Integer likes, Boolean sOrR, Boolean status,
 			String description, Date postTime, String coverPath, Integer ownerId) {
+		super();
+
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -59,14 +64,6 @@ public class Book {
 		this.postTime = postTime;
 		this.coverPath = coverPath;
 		this.ownerId = ownerId;
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getName() {

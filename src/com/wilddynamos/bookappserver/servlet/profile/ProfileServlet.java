@@ -20,7 +20,7 @@ import com.wilddynamos.bookappserver.service.UserManager;
 
 public class ProfileServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 4953808045786008751L;
+	private static final long serialVersionUID = 8539175548905858127L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

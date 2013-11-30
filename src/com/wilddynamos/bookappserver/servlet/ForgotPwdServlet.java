@@ -23,8 +23,7 @@ import com.wilddynamos.bookappserver.service.UserManager;
 
 public class ForgotPwdServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 3882829776413408269L;
-	
+	private static final long serialVersionUID = 8325321121883351287L;
 	private static Properties props;
 	static {
 		props = new Properties();

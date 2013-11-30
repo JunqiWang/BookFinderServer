@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 @WebServlet(asyncSupported = true)
 public class LongConnRegServlet extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6844621925820794386L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

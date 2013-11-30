@@ -21,7 +21,6 @@ public class LogoutServlet extends HttpServlet {
 		}
 
 		response.getWriter().println("1");
-		System.out.println("reached");
 	}
 
 	protected void doPost(HttpServletRequest request,

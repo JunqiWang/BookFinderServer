@@ -6,28 +6,12 @@ import java.util.*;
 
 import com.wilddynamos.bookappserver.model.Book;
 
-public class BookDao {
+public class BookDao extends BaseDao<Book> {
+	
 	private static final Integer DEFAULT_BOOK_PAGESIZE = 15;
-	private Connection conn;
-	private Statement stmt;
 	
 	public BookDao() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "root", null);
-			stmt = conn.createStatement();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void close() {
-		try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		super();
 	}
 	
 	public int add(Book book) {
@@ -44,7 +28,7 @@ public class BookDao {
 					+ book.getsOrR() + ", "
 					+ book.getStatus() + ", '"
 					+ book.getDescription() + "', '"
-					+ new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(book.getPostTime()) + "', '"
+					+ new SimpleDateFormat(DATE_TIME_FORMAT).format(book.getPostTime()) + "', '"
 					+ book.getCoverPath() + "', '"
 					+ book.getOwnerId() + "');");
 			
@@ -84,7 +68,7 @@ public class BookDao {
 									   + "s_or_r = " + book.getsOrR() + ", "
 									   + "status = " + book.getStatus() + ", "
 									   + "description = '" + book.getDescription() + "', "
-									   + "post_time = '" + book.getPostTime() + "', "
+									   + "post_time = '" + new SimpleDateFormat(DATE_TIME_FORMAT).format(book.getPostTime()) + "', "
 									   + "cover_path = '" + book.getCoverPath() + "', "
 									   + "owner_id = " + book.getOwnerId() + " "
 									   + "WHERE id = " + book.getId() + ";");
@@ -132,7 +116,7 @@ public class BookDao {
 	}
 	
 	public List<Book> findByProp(String name, String value, 
-			String order, Integer currentPage, Integer pageSize, Integer condition) {
+			String order, Integer currentPage, Integer pageSize, int condition) {
 		List<Book> books = new ArrayList<Book>();
 		try {
 			String sql = "SELECT * FROM book WHERE " + name;

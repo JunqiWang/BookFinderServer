@@ -16,9 +16,9 @@ import com.wilddynamos.bookappserver.model.Request;
 import com.wilddynamos.bookappserver.service.BookManager;
 import com.wilddynamos.bookappserver.service.RequestManager;
 
-public class GetMyBooksServlet extends HttpServlet {
+public class MyBookListServlet extends HttpServlet {
 	
-	private static final long serialVersionUID = 4953808045786008751L;
+	private static final long serialVersionUID = -3430769765327644516L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {

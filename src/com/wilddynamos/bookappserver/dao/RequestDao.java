@@ -6,29 +6,12 @@ import java.util.*;
 
 import com.wilddynamos.bookappserver.model.Request;
 
-public class RequestDao {
+public class RequestDao extends BaseDao<Request> {
+	
 	private static final Integer DEFAULT_REQUEST_PAGESIZE = 10;
-	private Connection conn;
-	private Statement stmt;
 	
 	public RequestDao() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			conn = DriverManager.getConnection(UserDao.address, "root", null);
-			stmt = conn.createStatement();
-		} catch (Exception e) {
-			//TODO
-			e.printStackTrace();
-		}
-	}
-	
-	public void close() {
-		try {
-			stmt.close();
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		super();
 	}
 	
 	public int add(Request request) {
@@ -128,7 +111,6 @@ public class RequestDao {
 			}
 			pageSize = (pageSize == null ? DEFAULT_REQUEST_PAGESIZE : pageSize);
 			
-//			sql += " AND status is null";
 			sql += " ORDER BY " + order 
 				   + " LIMIT " + (currentPage == null ? 0 : (currentPage - 1) * pageSize) + ", " 
 				   + pageSize + ";";
