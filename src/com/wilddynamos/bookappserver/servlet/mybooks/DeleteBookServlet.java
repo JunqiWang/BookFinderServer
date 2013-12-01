@@ -18,7 +18,7 @@ public class DeleteBookServlet extends HttpServlet {
 
 		response.setCharacterEncoding("UTF-8");
 
-		String id = request.getParameter("id");
+		String id = request.getParameter("id");System.out.println(id);
 
 		BookManager bm = new BookManager();
 		if(bm.removeById(Integer.parseInt(id)) > 0)

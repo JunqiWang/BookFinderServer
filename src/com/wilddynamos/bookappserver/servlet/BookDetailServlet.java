@@ -93,6 +93,9 @@ public class BookDetailServlet extends HttpServlet {
 			rm.close();
 
 			for (Request r : requests) {
+				System.out.println(r.getId());
+				System.out.println(r.getStatus());
+				System.out.println(r.getRequesterId());
 				if (r.getRequesterId().equals(
 						ActiveUserPool.session2user.get(
 								request.getSession().getId()).getId())
@@ -166,7 +169,7 @@ public class BookDetailServlet extends HttpServlet {
 		// is my request end
 
 		json.add(jo);
-
+		System.out.println(hasResponded);
 		response.getWriter().println(json.toString());
 	}
 
