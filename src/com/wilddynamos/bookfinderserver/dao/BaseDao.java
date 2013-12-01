@@ -6,22 +6,42 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+/**
+ * Base data access object
+ * 
+ * @author JunqiWang
+ * 
+ * @param <E>
+ *            entity
+ */
 public abstract class BaseDao<E> {
 
+	/**
+	 * Database address
+	 */
 	public static final String DB_ADDRESS = "jdbc:mysql://127.0.0.1:3306/book_app";
 
+	/**
+	 * jdbc driver name
+	 */
 	public static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 	public static final String USER_NAME = "root";
 
 	public static final String PASSWORD = null;
-	
-	public static final int DEFAULT_PAGESIZE =10;
+
+	public static final int DEFAULT_PAGESIZE = 10;
 
 	public static final String DATE_TIME_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
+	/**
+	 * Connection with database
+	 */
 	protected Connection conn;
 
+	/**
+	 * Statement to be executed
+	 */
 	protected Statement stmt;
 
 	public BaseDao() {

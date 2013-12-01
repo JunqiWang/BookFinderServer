@@ -40,7 +40,7 @@ public class EditProfileServlet extends HttpServlet {
 		String address = request.getParameter("address");
 		String imageString = request.getParameter("image");
 
-		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookAppServer/WebContent/profile_photo";// this.getServletContext().getRealPath("/profile_photo");
+		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookFinderServer/WebContent/profile_photo";// this.getServletContext().getRealPath("/profile_photo");
 		byte[] profileImage = imageString.getBytes(Charset
 				.forName("ISO-8859-1"));
 		InputStream in = new ByteArrayInputStream(profileImage);

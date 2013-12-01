@@ -6,6 +6,13 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+/**
+ * Servlet that provides the registration of a long connection.
+ * Used for pushed notifications.
+ * 
+ * @author JunqiWang
+ * 
+ */
 @WebServlet(asyncSupported = true)
 public class LongConnRegServlet extends HttpServlet {
 
@@ -14,15 +21,18 @@ public class LongConnRegServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 
+		// check if user is still alive
 		if (response != null) {
-			// this line is important
+			// this line is important, can't tell why
 			response.setContentType("text/html; charset=UTF-8");
 
-			ServletResponse res = (ServletResponse) request.getAttribute("response");
+			// extract response object from async request
+			ServletResponse res = (ServletResponse) request
+					.getAttribute("response");
 			Integer bookId = (Integer) request.getAttribute("bookId");
 
 			PrintWriter out = null;
-			if(res != null) {
+			if (res != null) {
 				out = res.getWriter();
 				if (bookId != null) {
 					if (bookId > 0)
@@ -58,7 +68,7 @@ public class LongConnRegServlet extends HttpServlet {
 		@Override
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
-			System.out.println(id);
+
 			actx.getRequest().setAttribute("response", actx.getResponse());// ?????????
 
 			synchronized (ActiveUserPool.userId2bookIds) {

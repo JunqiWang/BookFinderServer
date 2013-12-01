@@ -1,5 +1,11 @@
 package com.wilddynamos.bookfinderserver.model;
 
+/**
+ * Model User
+ * 
+ * @author JunqiWang
+ * 
+ */
 public class User extends BaseEntity {
 
 	private static final long serialVersionUID = -2908629024723879783L;
@@ -26,7 +32,7 @@ public class User extends BaseEntity {
 
 	public User(String email, String name, String password) {
 		super();
-		
+
 		this.email = email;
 		this.name = name;
 		this.password = password;
@@ -36,7 +42,7 @@ public class User extends BaseEntity {
 			Boolean gender, String campus, String contact, String address,
 			String photoPath) {
 		super();
-		
+
 		this.id = id;
 		this.email = email;
 		this.password = password;

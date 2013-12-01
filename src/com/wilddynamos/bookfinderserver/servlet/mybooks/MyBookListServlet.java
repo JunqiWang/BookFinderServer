@@ -24,7 +24,6 @@ public class MyBookListServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
 		
 		String id = request.getParameter("id");
 		

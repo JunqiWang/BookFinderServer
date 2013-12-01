@@ -1,4 +1,4 @@
-package com.wilddynamos.bookfinderserver.servlet.profile;
+package com.wilddynamos.bookfinderserver.servlet.mybooks;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,7 +41,6 @@ public class RequestListServlet extends HttpServlet {
 
 		JSONArray json = new JSONArray();
 		String path = this.getServletContext().getRealPath("/profile_photo");
-		System.out.println(path);
 
 		for (Request r : requesters) {
 			JSONObject jo = new JSONObject();

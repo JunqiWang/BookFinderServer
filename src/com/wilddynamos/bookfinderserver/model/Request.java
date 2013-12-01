@@ -2,6 +2,12 @@ package com.wilddynamos.bookfinderserver.model;
 
 import java.util.Date;
 
+/**
+ * Model Request
+ * 
+ * @author JunqiWang
+ * 
+ */
 public class Request extends BaseEntity {
 
 	private static final long serialVersionUID = -4171638851580115767L;
@@ -27,7 +33,7 @@ public class Request extends BaseEntity {
 	public Request(String message, Date requestTime, Integer bookId,
 			Integer requesterId) {
 		super();
-		
+
 		this.message = message;
 		this.requestTime = requestTime;
 		this.bookId = bookId;
@@ -37,7 +43,7 @@ public class Request extends BaseEntity {
 	public Request(Integer id, String message, Boolean status,
 			Date requestTime, Integer bookId, Integer requesterId) {
 		super();
-		
+
 		this.id = id;
 		this.message = message;
 		this.status = status;

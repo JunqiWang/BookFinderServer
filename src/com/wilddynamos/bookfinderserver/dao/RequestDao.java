@@ -6,6 +6,12 @@ import java.util.*;
 
 import com.wilddynamos.bookfinderserver.model.Request;
 
+/**
+ * Map between Request and the table request
+ * 
+ * @author JunqiWang
+ * 
+ */
 public class RequestDao extends BaseDao<Request> {
 
 	private static final Integer DEFAULT_REQUEST_PAGESIZE = 10;
@@ -137,12 +143,10 @@ public class RequestDao extends BaseDao<Request> {
 
 			ResultSet rs = stmt.executeQuery(sql);
 
-			while (rs.next()) {
-				System.out.println(rs.getBoolean(3) + "," + rs.getInt(1));
+			while (rs.next())
 				requests.add(new Request(rs.getInt(1), rs.getString(2), (rs
 						.getObject(3) == null ? null : rs.getBoolean(3)), rs
 						.getDate(4), rs.getInt(5), rs.getInt(6)));
-			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

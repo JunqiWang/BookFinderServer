@@ -41,11 +41,13 @@ public class PostEditBookServlet extends HttpServlet {
 		String description = request.getParameter("description");
 
 		String imageString = request.getParameter("cover");
-		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookAppServer/WebContent/book_cover";// this.getServletContext().getRealPath("/book_cover");
+
+		// For Eclipse Use
+		// Should use this.getServletContext().getRealPath("/book_cover");
+		String path = "/Users/JunqiWang/CMU/workspace/J2EE/BookFinderServer/WebContent/book_cover";
 		byte[] coverImage = imageString.getBytes(Charset.forName("ISO-8859-1"));
 		InputStream in = new ByteArrayInputStream(coverImage);
 		BufferedImage bufferedImage = ImageIO.read(in);
-		// Getting exception at this line
 
 		BookManager bm = new BookManager();
 		Book book = null;

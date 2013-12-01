@@ -4,6 +4,14 @@ import java.util.List;
 
 import com.wilddynamos.bookfinderserver.dao.BaseDao;
 
+/**
+ * Base database manager
+ * 
+ * @author JunqiWang
+ * 
+ * @param <E>
+ *            entity
+ */
 public abstract class BaseManager<E> {
 
 	protected abstract BaseDao<E> getEntityDao();
@@ -35,8 +43,7 @@ public abstract class BaseManager<E> {
 		return getEntityDao().addOrUpdate(baseEntity);
 	}
 
-	public List<E> findAll(String order, Integer currentPage,
-			Integer pageSize) {
+	public List<E> findAll(String order, Integer currentPage, Integer pageSize) {
 		return getEntityDao().findAll(order, currentPage, pageSize);
 	}
 

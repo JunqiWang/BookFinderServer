@@ -2,6 +2,12 @@ package com.wilddynamos.bookfinderserver.model;
 
 import java.util.Date;
 
+/**
+ * Model Book
+ * 
+ * @author JunqiWang
+ * 
+ */
 public class Book extends BaseEntity {
 
 	private static final long serialVersionUID = 1766341277163675267L;

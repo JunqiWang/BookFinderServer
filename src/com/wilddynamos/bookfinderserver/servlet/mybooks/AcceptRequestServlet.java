@@ -60,8 +60,6 @@ public class AcceptRequestServlet extends HttpServlet {
 							new ArrayList<Integer>());
 				ActiveUserPool.userId2bookIds.get(r.getRequesterId()).add(
 						-Integer.parseInt(bookId));
-				System.out.println(ActiveUserPool.userId2bookIds.get(
-						r.getRequesterId()).get(0));
 			}
 
 			ActiveUserPool.userId2bookIds.notifyAll();
