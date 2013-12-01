@@ -62,7 +62,7 @@ public class EditProfileServlet extends HttpServlet {
 		user.setCampus(campus);
 		user.setContact(contact);
 		user.setAddress(address);
-		user.setPhotoPath(path);
+		user.setPhotoPath(id + ".jpg");
 
 		int result = um.update(user);
 		if (result > 0)

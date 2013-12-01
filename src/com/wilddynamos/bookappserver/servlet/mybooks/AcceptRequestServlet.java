@@ -23,7 +23,6 @@ public class AcceptRequestServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html");
 
 		String bookId = request.getParameter("bookId");
 		String requesterId = request.getParameter("requesterId");

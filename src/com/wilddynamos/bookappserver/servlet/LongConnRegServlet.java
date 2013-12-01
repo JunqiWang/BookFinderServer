@@ -18,18 +18,21 @@ public class LongConnRegServlet extends HttpServlet {
 			// this line is important
 			response.setContentType("text/html; charset=UTF-8");
 
+			ServletResponse res = (ServletResponse) request.getAttribute("response");
 			Integer bookId = (Integer) request.getAttribute("bookId");
 
-			PrintWriter out = response.getWriter();
-			if (bookId != null) {
-				if (bookId > 0)
-					out.println("Req" + bookId);
-				else
-					out.println("Res" + (-bookId));
-			} else
-				out.println("Req");
-			// this line is important
-			out.flush();
+			PrintWriter out = null;
+			if(res != null) {
+				out = res.getWriter();
+				if (bookId != null) {
+					if (bookId > 0)
+						out.println("Req" + bookId);
+					else
+						out.println("Res" + (-bookId));
+				}
+				// this line is important
+				out.flush();
+			}
 
 			request.startAsync(request, response);
 			new MessageSender(request.getAsyncContext()).start();
@@ -55,7 +58,8 @@ public class LongConnRegServlet extends HttpServlet {
 		@Override
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
-			actx.getRequest().setAttribute("id", id);// ?????????
+			System.out.println(id);
+			actx.getRequest().setAttribute("response", actx.getResponse());// ?????????
 
 			synchronized (ActiveUserPool.userId2bookIds) {
 

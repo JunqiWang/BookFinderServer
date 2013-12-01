@@ -57,6 +57,10 @@
 		<servlet-class>com.wilddynamos.bookappserver.servlet.mybooks.PostEditBookServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>DeleteBook</servlet-name>
+		<servlet-class>com.wilddynamos.bookappserver.servlet.mybooks.DeleteBookServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>RequestList</servlet-name>
 		<servlet-class>com.wilddynamos.bookappserver.servlet.profile.RequestListServlet</servlet-class>
 	</servlet>
@@ -146,6 +150,10 @@
 	<servlet-mapping>
 		<servlet-name>PostOrEditBook</servlet-name>
 		<url-pattern>/PostEditBook</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DeleteBook</servlet-name>
+		<url-pattern>/DeleteBook</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>RequestList</servlet-name>
