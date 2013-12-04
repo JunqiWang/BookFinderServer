@@ -35,10 +35,13 @@ public class LongConnRegServlet extends HttpServlet {
 			if (res != null) {
 				out = res.getWriter();
 				if (bookId != null) {
-					if (bookId > 0)
+					if (bookId > 0) {
 						out.println("Req" + bookId);
-					else
+						System.out.println("push req " + bookId);
+					} else {
 						out.println("Res" + (-bookId));
+						System.out.println("push res " + bookId);
+					}
 				}
 				// this line is important
 				out.flush();
@@ -69,7 +72,7 @@ public class LongConnRegServlet extends HttpServlet {
 		public void run() {
 			Integer id = Integer.parseInt(actx.getRequest().getParameter("id"));
 
-			actx.getRequest().setAttribute("response", actx.getResponse());// ?????????
+			actx.getRequest().setAttribute("response", actx.getResponse());
 
 			synchronized (ActiveUserPool.userId2bookIds) {
 

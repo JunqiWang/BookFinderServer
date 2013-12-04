@@ -2,7 +2,6 @@ package com.wilddynamos.bookfinderserver.servlet.mybooks;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,21 +22,13 @@ public class DeclineRequestServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		String bookId = request.getParameter("bookId");
-		int requesterId = Integer.parseInt(request.getParameter("requesterId"));
+		String requesterId = request.getParameter("requesterId");
 
 		RequestManager rm = new RequestManager();
-		List<Request> requests = rm.findByProp("book_id", bookId,
-				"request_time", null, null, 1);
+		Request req = rm.findByBookAndRequester(bookId, requesterId);
 
-		int result = -1;
-		Request req = null;
-		for (Request r : requests)
-			if (r.getRequesterId() == requesterId) {
-				req = r;
-				r.setStatus(false);
-				result = rm.update(r);
-				break;
-			}
+		req.setStatus(false);
+		int result = rm.update(req);
 
 		rm.close();
 		if (result <= 0) {
