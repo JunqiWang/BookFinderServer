@@ -54,13 +54,16 @@ public class PostEditBookServlet extends HttpServlet {
 
 		if (bookId != null && !"".equals(bookId)) {
 			book = bm.findByProp("id", bookId, null, null, null, 1).get(0);
-			ImageIO.write(bufferedImage, "png", new File(path + "/" + bookId
-					+ ".png"));
+			
 			File file = new File(path + "/" + book.getCoverPath());
 			try {
 				file.delete();
 			} catch (Exception e) {
 			}
+			
+			ImageIO.write(bufferedImage, "png", new File(path + "/" + bookId
+					+ ".png"));
+			
 			book.setCoverPath(bookId + ".png");
 		} else {
 			book = new Book();

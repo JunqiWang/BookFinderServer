@@ -159,8 +159,8 @@ public class BookDetailServlet extends HttpServlet {
 		// is my post end
 
 		// is my request begin
-		if (isRequested != null)
-			jo.put("hasResponded", hasResponded);
+		if (isRequested != null) {
+			jo.put("hasResponded", hasResponded);System.out.println(hasResponded);}
 		// is my request end
 
 		json.add(jo);
