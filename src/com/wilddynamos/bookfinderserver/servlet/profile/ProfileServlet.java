@@ -15,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.wilddynamos.bookfinderserver.model.Request;
 import com.wilddynamos.bookfinderserver.model.User;
+import com.wilddynamos.bookfinderserver.service.RequestManager;
 import com.wilddynamos.bookfinderserver.service.UserManager;
 
 public class ProfileServlet extends HttpServlet {
@@ -28,6 +30,7 @@ public class ProfileServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 
 		String id = request.getParameter("id");
+		String bookId = request.getParameter("bookId");
 
 		UserManager um = new UserManager();
 		List<User> users = um.findByProp("id", id, null, null, null, 1);
@@ -36,6 +39,13 @@ public class ProfileServlet extends HttpServlet {
 		if (users.size() == 0) {
 			response.getWriter().println("-1");
 			return;
+		}
+		
+		Request req = null;
+		if(bookId != null) {
+			RequestManager rm = new RequestManager();
+			req = rm.findByBookAndRequester(bookId, id);
+			rm.close();
 		}
 
 		JSONArray json = new JSONArray();
@@ -49,6 +59,9 @@ public class ProfileServlet extends HttpServlet {
 		jo.put("campus", users.get(0).getCampus());
 		jo.put("contact", users.get(0).getContact());
 		jo.put("address", users.get(0).getAddress());
+		
+		if(bookId != null)
+			jo.put("message", req.getMessage());
 
 		File file = new File(path + "/" + id + ".jpg");
 
